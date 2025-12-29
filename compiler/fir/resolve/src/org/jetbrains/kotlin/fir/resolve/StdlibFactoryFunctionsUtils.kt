@@ -8,6 +8,7 @@ package org.jetbrains.kotlin.fir.resolve
 import org.jetbrains.kotlin.builtins.PrimitiveType
 import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.fir.FirSession
+import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
 import org.jetbrains.kotlin.fir.types.arrayElementType
 import org.jetbrains.kotlin.fir.types.asCone
@@ -23,6 +24,7 @@ import org.jetbrains.kotlin.fir.types.isUnsignedArray
 import org.jetbrains.kotlin.fir.types.typeContext
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.resolve.ArrayFqNames
 import org.jetbrains.kotlin.types.model.withNullability
 import kotlin.collections.get
@@ -55,22 +57,20 @@ fun toArrayOfFactoryName(
 }
 
 fun toCollectionOfFactoryPackageAndName(
-    expectedType: ConeKotlinType,
+    expectedClass: FirRegularClassSymbol,
     session: FirSession,
 ): Pair<FqName, Name>? {
-
-    toArrayOfFactoryName(expectedType, session, eagerlyReturnNonPrimitive = false)?.let {
+    toArrayOfFactoryName(expectedClass.defaultType(), session, eagerlyReturnNonPrimitive = false)?.let {
         return StandardNames.BUILT_INS_PACKAGE_FQ_NAME to it
     }
 
-    val coneType = with(session.typeContext) { expectedType.fullyExpandedType(session).withNullability(false).asCone() }
-
-    return when {
-        coneType.isList -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("listOf")
-        coneType.isMutableList -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("mutableListOf")
-        coneType.isSet -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("setOf")
-        coneType.isMutableSet -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("mutableSetOf")
-        coneType.isSequence -> StandardNames.SEQUENCES_PACKAGE_FQ_NAME to Name.identifier("sequenceOf")
+    return when (expectedClass.classId) {
+        StandardClassIds.Array -> StandardNames.BUILT_INS_PACKAGE_FQ_NAME to Name.identifier("arrayOf")
+        StandardClassIds.List -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("listOf")
+        StandardClassIds.MutableList -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("mutableListOf")
+        StandardClassIds.Set -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("setOf")
+        StandardClassIds.MutableSet -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("mutableSetOf")
+        StandardClassIds.Sequence -> StandardNames.SEQUENCES_PACKAGE_FQ_NAME to Name.identifier("sequenceOf")
         else -> null
     }
 }
