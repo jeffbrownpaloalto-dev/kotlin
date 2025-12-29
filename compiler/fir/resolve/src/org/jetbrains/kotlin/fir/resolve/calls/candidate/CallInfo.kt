@@ -101,7 +101,8 @@ open class CallInfo(
         callSite, callKind, name, explicitReceiver, argumentList,
         isUsedAsGetClassReceiver, typeArguments,
         session, containingFile, containingDeclarations,
-        candidateForCommonInvokeReceiver, resolutionMode, origin, implicitInvokeMode
+        candidateForCommonInvokeReceiver, resolutionMode, origin, implicitInvokeMode,
+        wasCollectionLiteralCall,
     )
 }
 
