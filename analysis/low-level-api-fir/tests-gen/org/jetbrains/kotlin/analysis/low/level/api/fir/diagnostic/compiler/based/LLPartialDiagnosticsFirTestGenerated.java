@@ -2555,6 +2555,12 @@ public class LLPartialDiagnosticsFirTestGenerated extends AbstractLLPartialDiagn
         }
 
         @Test
+        @TestMetadata("flexibleExpectedTypes.kt")
+        public void testFlexibleExpectedTypes() {
+          runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/stdlibTypes/flexibleExpectedTypes.kt");
+        }
+
+        @Test
         @TestMetadata("incorrectCollections.kt")
         public void testIncorrectCollections() {
           runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/stdlibTypes/incorrectCollections.kt");
@@ -2613,6 +2619,12 @@ public class LLPartialDiagnosticsFirTestGenerated extends AbstractLLPartialDiagn
         }
 
         @Test
+        @TestMetadata("capturedExpectedTypes.kt")
+        public void testCapturedExpectedTypes() {
+          runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/userTypes/capturedExpectedTypes.kt");
+        }
+
+        @Test
         @TestMetadata("collectionLiteralsAndSmartcasts.kt")
         public void testCollectionLiteralsAndSmartcasts() {
           runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/userTypes/collectionLiteralsAndSmartcasts.kt");
@@ -2622,6 +2634,18 @@ public class LLPartialDiagnosticsFirTestGenerated extends AbstractLLPartialDiagn
         @TestMetadata("collectionLiteralsWithNestedExpressionsInside.kt")
         public void testCollectionLiteralsWithNestedExpressionsInside() {
           runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/userTypes/collectionLiteralsWithNestedExpressionsInside.kt");
+        }
+
+        @Test
+        @TestMetadata("dnnExpectedTypes.kt")
+        public void testDnnExpectedTypes() {
+          runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/userTypes/dnnExpectedTypes.kt");
+        }
+
+        @Test
+        @TestMetadata("flexibleExpectedTypes.kt")
+        public void testFlexibleExpectedTypes() {
+          runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/userTypes/flexibleExpectedTypes.kt");
         }
 
         @Test
@@ -2667,6 +2691,12 @@ public class LLPartialDiagnosticsFirTestGenerated extends AbstractLLPartialDiagn
         }
 
         @Test
+        @TestMetadata("intersectionExpectedTypes.kt")
+        public void testIntersectionExpectedTypes() {
+          runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/userTypes/intersectionExpectedTypes.kt");
+        }
+
+        @Test
         @TestMetadata("noExplicitReturnTypeRecursion.kt")
         public void testNoExplicitReturnTypeRecursion() {
           runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/userTypes/noExplicitReturnTypeRecursion.kt");
@@ -2694,6 +2724,12 @@ public class LLPartialDiagnosticsFirTestGenerated extends AbstractLLPartialDiagn
         @TestMetadata("nonGenericCollectionWithGenericElementTypeAssignments.kt")
         public void testNonGenericCollectionWithGenericElementTypeAssignments() {
           runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/userTypes/nonGenericCollectionWithGenericElementTypeAssignments.kt");
+        }
+
+        @Test
+        @TestMetadata("nullableExpectedTypes.kt")
+        public void testNullableExpectedTypes() {
+          runTest("compiler/fir/analysis-tests/testData/resolve/collectionLiterals/userTypes/nullableExpectedTypes.kt");
         }
 
         @Test
