@@ -11,22 +11,14 @@ import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
 import org.jetbrains.kotlin.fir.types.arrayElementType
-import org.jetbrains.kotlin.fir.types.asCone
 import org.jetbrains.kotlin.fir.types.classId
-import org.jetbrains.kotlin.fir.types.isList
-import org.jetbrains.kotlin.fir.types.isMutableList
-import org.jetbrains.kotlin.fir.types.isMutableSet
 import org.jetbrains.kotlin.fir.types.isNonPrimitiveArray
 import org.jetbrains.kotlin.fir.types.isPrimitiveArray
-import org.jetbrains.kotlin.fir.types.isSequence
-import org.jetbrains.kotlin.fir.types.isSet
 import org.jetbrains.kotlin.fir.types.isUnsignedArray
-import org.jetbrains.kotlin.fir.types.typeContext
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
 import org.jetbrains.kotlin.resolve.ArrayFqNames
-import org.jetbrains.kotlin.types.model.withNullability
 import kotlin.collections.get
 
 fun toArrayOfFactoryName(
@@ -65,7 +57,6 @@ fun toCollectionOfFactoryPackageAndName(
     }
 
     return when (expectedClass.classId) {
-        StandardClassIds.Array -> StandardNames.BUILT_INS_PACKAGE_FQ_NAME to Name.identifier("arrayOf")
         StandardClassIds.List -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("listOf")
         StandardClassIds.MutableList -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("mutableListOf")
         StandardClassIds.Set -> StandardNames.COLLECTIONS_PACKAGE_FQ_NAME to Name.identifier("setOf")
